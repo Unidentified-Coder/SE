@@ -1,5 +1,3 @@
-PRODUCT BACKLOG:
- 
 1.Create a database schema to hold demographic information.
 2.Create the front end for designing user interfaces.
 3.Apply backend logic to data management and report generation.
@@ -12,4 +10,3 @@ PRODUCT BACKLOG:
 10.Based on input, improve the user interface and overall experience.
 11.To guarantee system security and functionality, do testing and debugging.
 12. Provide user support for using the system.(information about using the web)
-

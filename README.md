@@ -1,6 +1,8 @@
 # SE
 Software Engineering 
 
+Code Of Conduct:
+
 Professionalism: 
 All participants are expected to conduct themselves in a professional manner at all times. This includes respectful communication, meeting deadlines, and collaborating effectively with team members.  
 
