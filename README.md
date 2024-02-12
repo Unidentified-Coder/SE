@@ -2,9 +2,9 @@
 Software Engineering 
 
 Members:
-Rodas Samson Gebrtensea
-Kaue Goncalves Ravagnani
-Benjamin Tota
+Rodas Samson Gebrtensea,
+Kaue Goncalves Ravagnani,
+Benjamin Tota,
 Rigers Bushi  
 
 Code Of Conduct:
