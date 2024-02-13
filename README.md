@@ -30,16 +30,22 @@ Participants must uphold the principles of academic integrity and avoid any form
 Adherence to Policies: 
 Participants must comply with all relevant policies and regulation
 
-Communication
+Communication:
 This will play a big factor on how we develop as a team and how going forward.
 
-To the names above this concerns these rules are in place to be abided by and understood failure to do so will result in a strike system with each strike being progressively harsher
+Team Meeting - They will be held once a week on sundays in order for us to look over everything and ensure everything is in order and all members know what their task is.
 
-1st £20 fine,
-2nd £50 fine,
-3rd Resignation of the team
+Punishment - To the names above this concerns these rules are in place to be abided by and understood failure to do so will result in a strike system with each strike being progressively harsher;
 
-signed by;
+1st strike - £20 fine
+
+2nd strike - £50 fine
+
+3rd strike - Resignation of the team (And is required to inform the instructor as to why this has happened)
+
+
+
+Signed by;
 
 Rodas Samson Gebrtensea
 
