@@ -1,0 +1,12 @@
+1.Create a database schema to hold demographic information.
+2.Create the front end for designing user interfaces.
+3.Apply backend logic to data management and report generation.
+4.Put security and user authentication into practice.
+5.Provide the ability to create reports that are sorted by population for areas, cities, countries, and continents.
+6.Provide the capability to update the database with new data.
+7.Implement population reports for cities, countries, regions, and continents.
+8.Provide the ability to view the world's population as well as that of the continents, regions, nations, cities, districts, and states.
+9.Provide language population report functionality.
+10.Based on input, improve the user interface and overall experience.
+11.To guarantee system security and functionality, do testing and debugging.
+12. Provide user support for using the system.(information about using the web)
