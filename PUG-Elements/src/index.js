@@ -34,7 +34,6 @@ app.get("/ping", (req, res) => {
   res.send("pong");
 });
 
-// Returns an array of cities from the database
 app.get("/cities", async (req, res) => {
   try{
     const [rows, fields]= await db.execute("SELECT * FROM `city`");
