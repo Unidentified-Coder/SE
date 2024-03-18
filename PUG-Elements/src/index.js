@@ -36,12 +36,12 @@ app.get("/ping", (req, res) => {
   res.send("pong");
 });
 
-// app.get("/cities", (req, res) => {
-//   db.execute("SELECT * FROM `city`", (err, rows, fields) => {
-//     console.log(`/cities: ${rows.length} rows`);
-//     return res.send(rows);
-//   });
-// });
+app.get("/cities", (req, res) => {
+  db.execute("SELECT * FROM `city`", (err, rows, fields) => {
+    console.log(`/cities: ${rows.length} rows`);
+    return res.send(rows);
+  });
+});
 
 app.get("/cities", async (req, res) => {
   try{
@@ -57,15 +57,15 @@ app.get("/api/cities", async (req, res) => {
   return res.send(rows);
 })
 
-// //Dinamic route example
-// app.get("/city/:id", function (req, res) {
-//   //req.params contains any parametres in the request
-//   //We can examinit in the console for debugging purpose
-//   console.log(req, res);
-//   //Retrive the name paramentre and use it in a dinamic generated 
-//   res.send("Id is " + req.params.id);
+//Dinamic route example
+app.get("/city/:id", function (req, res) {
+  //req.params contains any parametres in the request
+  //We can examinit in the console for debugging purpose
+  console.log(req, res);
+  //Retrive the name paramentre and use it in a dinamic generated 
+  res.send("Id is " + req.params.id);
 
-// });
+});
 
 // Run server!
 app.listen(port, () => {
