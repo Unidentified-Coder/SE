@@ -1,0 +1,19 @@
+extends layout.pug 
+
+block head 
+
+
+block content 
+    h2 Cities
+    table 
+        thead 
+            th.text-center 
+            th City 
+            th.number Population 
+        tbody 
+            each row in rows 
+                tr
+                    td.fit #{row.CountryCode}
+                    td #{row.Name}
+                    - Const Population = new Intl.NumberFormat().format(row.Population)
+                    td.fit.number #{Population} 
