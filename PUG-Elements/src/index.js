@@ -10,6 +10,8 @@ const port = 3000;
 app.set("view engine", "pug");
 app.set("views","./views");
 
+app.set("view engine", "pug")
+
 //Add a static files location
 app.use(express.static("static"));
 
