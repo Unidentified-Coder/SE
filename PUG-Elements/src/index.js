@@ -15,7 +15,6 @@ app.set("view engine", "pug")
 //Add a static files location
 app.use(express.static("static"));
 
-console.log(process.env.MODE_ENV);
 
 /* Setup database connection */
 const db = mysql.createConnection({
@@ -34,6 +33,10 @@ app.get("/",(req, res) => {
 // Sample API route
 app.get("/ping", (req, res) => {
   res.send("pong");
+});
+
+app.get("/gallery", req, res => {
+  res.render("gallery");
 });
 
 app.get("/cities", (req, res) => {
