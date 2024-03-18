@@ -10,11 +10,10 @@ const port = 3000;
 app.set("view engine", "pug");
 app.set("views","./views");
 
-app.set("view engine", "pug")
-
 //Add a static files location
 app.use(express.static("static"));
 
+console.log(process.env.MODE_ENV);
 
 /* Setup database connection */
 const db = mysql.createConnection({
@@ -35,30 +34,13 @@ app.get("/ping", (req, res) => {
   res.send("pong");
 });
 
-app.get("/gallery", req, res => {
-  res.render("gallery");
-});
-
+// Returns an array of cities from the database
 app.get("/cities", (req, res) => {
   db.execute("SELECT * FROM `city`", (err, rows, fields) => {
     console.log(`/cities: ${rows.length} rows`);
     return res.send(rows);
   });
 });
-
-app.get("/cities", async (req, res) => {
-  try{
-    const [rows, fields]= await db.execute("SELECT * FROM `city`");
-    return res.render("cities",{rows, fields});
-  }catch(err){
-    console.error(err);
-  }
-});
-
-app.get("/api/cities", async (req, res) => {
-  const [rows, fields] = await db.execute("SELECT * FROM `city`");
-  return res.send(rows);
-})
 
 //Dinamic route example
 app.get("/city/:id", function (req, res) {
