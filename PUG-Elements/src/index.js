@@ -2,10 +2,6 @@
 const express = require("express");
 const mysql = require("mysql2");
 
-var app = express();
-
-app.use(express.static("static"))
-
 /* Create express instance */
 const app = express();
 const port = 3000;
