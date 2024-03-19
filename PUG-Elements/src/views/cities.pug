@@ -16,5 +16,5 @@ block content
                 tr
                     td.fit #{row.CountryCode}
                     td #{row.Name}
-                    - Const Population = new Intl.NumberFormat().format(row.Population)
+                    - const Population = new Intl.NumberFormat().format(row.Population)
                     td.fit.number #{Population} 
