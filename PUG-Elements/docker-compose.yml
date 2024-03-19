@@ -5,7 +5,6 @@ services:
     image: mysql
     volumes:
       - ./data/:/docker-entrypoint-initdb.d/
-    command: supervisor -e '.' index.js
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=user
@@ -21,8 +20,10 @@ services:
     depends_on:
       - database
     restart: on-failure
-    command: supervisor -e '.' index.js
+    command: supervisor -e '.' index.mjs
     environment:
       - DATABASE_HOST=database
     ports:
       - 3000:3000
+
+      
