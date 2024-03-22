@@ -35,9 +35,15 @@ app.get("/gallery", (req, res) => {
     res.render("gallery");
 });
 
+// // More info in About Route
+// app.get("/about", (req, res) => {
+//     res.render("about",{title: "About us"})
+    
+// });
+
 // About route
 app.get("/about", (req, res) => {
-    res.render("about", { title: "Boring about page" });
+    res.render("about", { info: "Currently this is a project handed down to us and we are just experimenting on how good our coding skills are ..." });
 });
 
 app.get("/cities", async (req, res) => {
