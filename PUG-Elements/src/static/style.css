@@ -60,3 +60,8 @@ nav a:hover {
 .layout-content {
   padding-top: 1.5rem;
 }
+
+footer{
+  margin-top: auto;
+  text-align: center;
+}

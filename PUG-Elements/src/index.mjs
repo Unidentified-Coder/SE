@@ -30,10 +30,10 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-// // Gallery route
-// app.get("/gallery", (req, res) => {
-//     res.render("gallery");
-// });
+// Gallery route
+app.get("/gallery", (req, res) => {
+    res.render("gallery");
+});
 
 // // More info in About Route
 // app.get("/about", (req, res) => {
