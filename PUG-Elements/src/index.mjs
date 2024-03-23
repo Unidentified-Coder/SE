@@ -155,6 +155,9 @@ app.post("/api/login", async (req, res) => {
     return res.redirect("/account");
 });
 
+function filter(){
+    console.log("filter button cleared")
+}
 
 // Run server!
 app.listen(port, () => {

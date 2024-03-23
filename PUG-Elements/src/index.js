@@ -52,6 +52,7 @@ app.get("/city/:id", function (req, res) {
 
 });
 
+
 // Run server!
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
