@@ -1,4 +1,43 @@
 extends layout
+
 block content
-    h1 #{heading}
-    p first paragraph xxx
+  nav
+    b Filter Options:
+    form(action="/filter", method="get")
+      div(style="margin-bottom: 10px;")
+        label(for="cityCheckbox") Filter by City:
+        input(type="checkbox", id="cityCheckbox", name="filterByCity")
+
+      div(style="margin-bottom: 10px;")
+        label(for="countryCheckbox") Filter by Country:
+        input(type="checkbox", id="countryCheckbox", name="filterByCountry")
+
+      div(style="margin-bottom: 10px;")
+        label(for="languageCheckbox") Filter by Language:
+        input(type="checkbox", id="languageCheckbox", name="filterByLanguage")
+
+      div(style="margin-bottom: 10px;")
+        label(for="populationDropdown") Population:
+        select(id="populationDropdown", name="filterByPopulation")
+          option(value="none") None
+          option(value="asc") Lowest to Highest
+          option(value="desc") Highest to Lowest
+
+      button(type="submit") Apply Filters
+
+  table(style="border-collapse: collapse; width: 100%;")
+    thead
+      tr
+        th(style="border: 1px solid #dddddd; text-align: left; padding: 8px;") ID
+        th(style="border: 1px solid #dddddd; text-align: left; padding: 8px;") Name
+        th(style="border: 1px solid #dddddd; text-align: left; padding: 8px;") Country Code
+        th(style="border: 1px solid #dddddd; text-align: left; padding: 8px;") District
+        th(style="border: 1px solid #dddddd; text-align: left; padding: 8px;") Population
+    tbody
+      each item in data
+        tr
+          td(style="border: 1px solid #dddddd; text-align: left; padding: 8px;") #{item.ID}
+          td(style="border: 1px solid #dddddd; text-align: left; padding: 8px;") #{item.Name}
+          td(style="border: 1px solid #dddddd; text-align: left; padding: 8px;") #{item.CountryCode}
+          td(style="border: 1px solid #dddddd; text-align: left; padding: 8px;") #{item.District}
+          td(style="border: 1px solid #dddddd; text-align: left; padding: 8px;") #{item.Population}
