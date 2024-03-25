@@ -12,39 +12,47 @@ app.set("views", "./views");
 // Add a static files location
 app.use(express.static("static"));
 
-// Dummy data to simulate database response, change it to get data from sql
-const dummyData = [
-  { ID: 1, Name: "Kabul", CountryCode: "AFG", District: "Kabol", Population: 1780000 },
-  { ID: 2, Name: "Qandahar", CountryCode: "AFG", District: "Qandahar", Population: 237500 },
-  { ID: 3, Name: "Herat", CountryCode: "AFG", District: "Herat", Population: 186800 },
-  { ID: 4, Name: "Mazar-e-Sharif", CountryCode: "AFG", District: "Balkh", Population: 127800 },
-  { ID: 5, Name: "Amsterdam", CountryCode: "NLD", District: "Noord-Holland", Population: 731200 }
-];
+console.log(process.env.MODE_ENV);
+
+/* Setup database connection */
+const db = mysql.createConnection({
+  host: process.env.DATABASE_HOST || "localhost",
+  user: "user",
+  password: "password",
+  database: "world",
+});
 
 /* Landing route */
-app.get("/", (req, res) => {
-  // Render the index1.pug template with the dummy data
-  res.render("index1", { title: "My index page", heading: "My heading", data: dummyData });
+app.get("/",(req, res) => {
+  res.render("index1",
+    { 'title': 'My index page', 'heading': 'My heading' });
 });
 
-/* Filter route */
-app.get("/filter", (req, res) => {
-  let filteredData = dummyData;
-
-  // Apply filters based on query parameters
-  if (req.query.filterByPopulation) {
-    if (req.query.filterByPopulation === 'asc') {
-      filteredData = filteredData.sort((a, b) => a.Population - b.Population);
-    } else if (req.query.filterByPopulation === 'desc') {
-      filteredData = filteredData.sort((a, b) => b.Population - a.Population);
-    }
-  }
-
-  // Render the index1.pug template with the filtered data
-  res.render("index1", { title: "My index page", heading: "My heading", data: filteredData });
+// Sample API route
+app.get("/ping", (req, res) => {
+  res.send("pong");
 });
+
+// Returns an array of cities from the database
+app.get("/cities", (req, res) => {
+  db.execute("SELECT * FROM `city`", (err, rows, fields) => {
+    console.log(`/cities: ${rows.length} rows`);
+    return res.send(rows);
+  });
+});
+
+//Dinamic route example
+app.get("/city/:id", function (req, res) {
+  //req.params contains any parametres in the request
+  //We can examinit in the console for debugging purpose
+  console.log(req, res);
+  //Retrive the name paramentre and use it in a dinamic generated 
+  res.send("Id is " + req.params.id);
+
+});
+
 
 // Run server
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+    console.log(`Server running on port ${port}`);
 });
