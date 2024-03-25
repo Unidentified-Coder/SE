@@ -6,14 +6,22 @@ table {
     border: 1px solid var(--clr-table);
     border-collapse: collapse;
     width: 100%;
+    table-layout: fixed; /* Set the table-layout property to fixed */
 }
 
 th,
 td {
     border-bottom: 1px solid var(--clr-table);
+    border-right: 1px solid var(--clr-table); /* Add border-right to create lines between columns */
     padding: 0.25rem 1rem;
     text-align: center;
     color: rgba(0, 0, 0, 0.85);
+}
+
+/* Remove border-right for the last column */
+th:last-child,
+td:last-child {
+    border-right: none;
 }
 
 thead {

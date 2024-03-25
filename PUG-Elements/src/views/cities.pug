@@ -6,13 +6,15 @@ block head
 
 block content
   h2 Cities 
-  button Filter 
+  button(onclick="filter()") Filter
   table
     thead
-      th ID
-      th.text-center Country
-      th City
-      th Population
+      tr
+        th| ID
+        th.text-center| Country Code
+        th| City
+        th| District
+        th| Population
     tbody
       each row, i in rows
         tr
@@ -20,5 +22,6 @@ block content
             a(href=`/cities/${i + 1}`) #{i + 1}
           td.fit #{row.CountryCode}
           td #{row.Name}
+          td #{row.District}
           - const population = new Intl.NumberFormat().format(row.Population);
           td.fit.number #{population}
