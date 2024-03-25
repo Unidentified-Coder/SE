@@ -61,7 +61,20 @@ nav a:hover {
   padding-top: 1.5rem;
 }
 
+<<<<<<< HEAD
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+=======
 footer{
   margin-top: auto;
   text-align: center;
 }
+>>>>>>> dev

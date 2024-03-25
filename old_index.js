@@ -1,15 +1,16 @@
 /* Import dependencies */
 const express = require("express");
+const mysql = require("mysql2");
 
 /* Create express instance */
 const app = express();
-const port = process.env.PORT || 3000; // Use environment variable for port
+const port = 3000;
 
-// Use the pug template engine
+//Use the pug template engine
 app.set("view engine", "pug");
-app.set("views", "./views");
+app.set("views","./views");
 
-// Add a static files location
+//Add a static files location
 app.use(express.static("static"));
 
 console.log(process.env.MODE_ENV);
@@ -51,8 +52,7 @@ app.get("/city/:id", function (req, res) {
 
 });
 
-
-// Run server
+// Run server!
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
