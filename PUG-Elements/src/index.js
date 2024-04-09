@@ -51,6 +51,13 @@ app.get("/city/:id", function (req, res) {
 
 });
 
+// Gives the route for the country in the sql database
+app.get("/country", (req, res) => {
+  db.execute("SELECT * FROM `country`", (err, rows, fields) =>{
+    console.log(`/country:${rows.length} rows`);
+  });
+});
+
 
 // Run server
 app.listen(port, () => {
