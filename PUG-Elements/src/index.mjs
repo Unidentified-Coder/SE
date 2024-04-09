@@ -58,6 +58,7 @@ app.get("/cities/:id", async (req, res) => {
     return res.render("city", { city });
 });
 
+
 /* Update a city by ID */
 app.post("/cities/:id", async (req, res) => {
     const cityId = req.params.id;
@@ -155,9 +156,6 @@ app.post("/api/login", async (req, res) => {
     return res.redirect("/account");
 });
 
-function filter(){
-    console.log("filter button cleared")
-}
 
 // Run server!
 app.listen(port, () => {

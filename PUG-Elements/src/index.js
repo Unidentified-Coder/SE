@@ -52,9 +52,9 @@ app.get("/city/:id", function (req, res) {
 });
 
 // Gives the route for the country in the sql database
-app.get("/country", (req, res) => {
-  db.execute("SELECT * FROM `country`", (err, rows, fields) =>{
-    console.log(`/country:${rows.length} rows`);
+app.get("/countrylanguage", (req, res) => {
+  db.execute("SELECT * FROM `countryLanguage`", (err, rows, fields) =>{
+    return res.render("countrylanguage", {rows, fields})
   });
 });
 
