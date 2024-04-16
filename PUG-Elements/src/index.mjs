@@ -57,7 +57,7 @@ app.get("/cities/:id", async (req, res) => {
     const city = await db.getCity(cityId);
     return res.render("city", { city });
 });
-
+//wpw
 
 /* Update a city by ID */
 app.post("/cities/:id", async (req, res) => {
