@@ -2,20 +2,28 @@
     --clr-table: rgba(0, 0, 0, 0.75);
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('bt.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
 table {
     border: 1px solid var(--clr-table);
     border-collapse: collapse;
     width: 100%;
-    table-layout: fixed; /* Set the table-layout property to fixed */
+    table-layout: fixed;
 }
 
 th,
 td {
     border-bottom: 1px solid var(--clr-table);
-    border-right: 1px solid var(--clr-table); /* Add border-right to create lines between columns */
+    border-right: 1px solid var(--clr-table);
     padding: 0.25rem 1rem;
     text-align: center;
-    color: rgba(0, 0, 0, 0.85);
+    color: rgba(218, 27, 27, 0.85); /* Updated color for th and td */
 }
 
 /* Remove border-right for the last column */
@@ -25,7 +33,7 @@ td:last-child {
 }
 
 thead {
-    background-color: var(--clr-table);
+    /* Removed background-color */
 }
 
 thead th {
