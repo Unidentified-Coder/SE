@@ -5,7 +5,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url(' ');
+    background-image: url('bt.jpg');
     background-size: cover; /* Adjust as needed */
     background-position: center; /* Adjust as needed */
 }
@@ -23,7 +23,7 @@ td {
     border-right: 1px solid var(--clr-table);
     padding: 0.25rem 1rem;
     text-align: center;
-    color: rgba(0, 0, 0, 0.85);
+    color: rgba(110, 41, 41, 0.85);
 }
 
 /* Remove border-right for the last column */
