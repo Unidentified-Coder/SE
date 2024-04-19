@@ -30,6 +30,8 @@ td {
 th:last-child,
 td:last-child {
     border-right: none;
+    text-align: center;
+    font-size: large;
 }
 
 thead {
