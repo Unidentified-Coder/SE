@@ -23,7 +23,7 @@ td {
     border-right: 1px solid var(--clr-table);
     padding: 0.25rem 1rem;
     text-align: center;
-    color: rgba(218, 27, 27, 0.85); /* Updated color for th and td */
+    color: rgba(16, 14, 14, 0.85); /* Updated color for th and td */
 }
 
 /* Remove border-right for the last column */
@@ -33,7 +33,7 @@ td:last-child {
 }
 
 thead {
-    /* Removed background-color */
+    background-color: transparent; /* Set background color to transparent */
 }
 
 thead th {

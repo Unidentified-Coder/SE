@@ -54,7 +54,7 @@ nav a {
 }
 
 nav a:hover {
-  color: cornflowerblue;
+  color: rgb(197, 44, 46);
 }
 
 .layout-content {
@@ -77,8 +77,8 @@ footer{
 /* Button styles */
 .button {
   padding: 10px 20px;
-  background-color: #007bff; /* Change to your desired background color */
-  color: #fff; /* Change to your desired text color */
+  background-color: #a51919; /* Change to your desired background color */
+  color: #d72323; /* Change to your desired text color */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -87,5 +87,5 @@ footer{
 
 /* Button hover effect */
 .button:hover {
-  background-color: #0056b3; /* Change to your desired hover background color */
+  background-color: #f4ecec; /* Change to your desired hover background color */
 }
