@@ -8,45 +8,46 @@ body {
     background-image: url('bt.jpg');
     background-size: cover;
     background-position: center;
+    background-color: var(--clr-table); /* Set background color */
+}
+
+.container {
+    padding: 20px; /* Add padding around the container */
+    box-sizing: border-box; /* Include padding in width calculations */
+    width: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
 }
 
 table {
     border: 1px solid var(--clr-table);
     border-collapse: collapse;
-    width: 100%;
-    table-layout: fixed;
+    width: 100%; /* Set table width to 100% of its container */
+    table-layout: auto; /* Use automatic table layout */
 }
 
 th,
 td {
-    border-bottom: 1px solid var(--clr-table);
-    border-right: 1px solid var(--clr-table);
-    padding: 0.25rem 1rem;
+    border: 1px solid var(--clr-table); /* Simplified border style */
+    padding: 10px; /* Adjust padding for better spacing */
     text-align: center;
-    color: rgba(16, 14, 14, 0.85); /* Updated color for th and td */
+    color: rgba(16, 14, 14, 0.85);
+    overflow-wrap: break-word; /* Break words to prevent overflow */
 }
 
 /* Remove border-right for the last column */
 th:last-child,
 td:last-child {
     border-right: none;
-    text-align: center;
-    font-size: large;
 }
 
 thead {
-    background-color: transparent; /* Set background color to transparent */
+    background-color: transparent;
 }
 
 thead th {
     color: rgb(8, 7, 7);
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-}
-
-.fit {
-    width: 1px;
-    white-space: nowrap;
+    padding: 12px; /* Adjust padding for header cells */
 }
 
 .text-center {
