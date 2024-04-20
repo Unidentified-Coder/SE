@@ -49,6 +49,13 @@ app.get("/countries", (req, res) => {
   });
 });
 
+// Gives the route for the country in the sql database
+app.get("/countrylanguages", (req, res) => {
+  db.execute("SELECT * FROM `countrylanguage`", (err, rows, fields) => {
+    console.log(`/countrylanguages: ${rows.length} rows`);
+    return res.send(rows);
+  });
+});
 
 // Run server
 app.listen(port, () => {

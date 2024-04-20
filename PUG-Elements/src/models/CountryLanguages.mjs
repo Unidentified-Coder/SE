@@ -1,16 +1,13 @@
-export default class City {
-    id;
-    name;
-    countryCode;
-    district;
-    population;
-    country;
+export default class CountryLanguage {
+    CountryCode;
+    Language;
+    IsOfficial;
+    Percentage;
 
-    constructor(id, name, countryCode, district, population) {
-        this.id = id;
-        this.name = name;
-        this.countryCode = countryCode;
-        this.district = district;
-        this.population = population;
+    constructor(CountryCode, Language, IsOfficial, Percentage) {
+        this.CountryCode = CountryCode;
+        this.Language = Language;
+        this.IsOfficial = IsOfficial;
+        this.Percentage = Percentage;
     }
 }

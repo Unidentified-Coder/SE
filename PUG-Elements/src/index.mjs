@@ -23,23 +23,10 @@ console.log(process.env.MODE_ENV);
 const db = await DatabaseService.connect();
 const { conn } = db;
 
-
-
 // Landing route
 app.get("/", (req, res) => {
     res.render("index");
 });
-
-// Gallery route
-app.get("/gallery", (req, res) => {
-    res.render("gallery");
-});
-
-// // More info in About Route
-// app.get("/about", (req, res) => {
-//     res.render("about",{title: "About us"})
-    
-// });
 
 // About route
 app.get("/about", (req, res) => {
@@ -52,23 +39,10 @@ app.get("/cities", async (req, res) => {
     return res.render("cities", { rows, fields });
 });
 
-app.get("/cities/:id", async (req, res) => {
+app.get("/cities/:Id", async (req, res) => {
     const cityId = req.params.id;
     const city = await db.getCity(cityId);
     return res.render("city", { city });
-});
-
-/* Update a city by ID */
-app.post("/cities/:id", async (req, res) => {
-    const cityId = req.params.id;
-    const { name } = req.body;
-    const sql = `
-    UPDATE city
-    SET Name = '${name}'
-    WHERE ID = '${cityId}';
-  `;
-    await conn.execute(sql);
-    return res.redirect(`/cities/${cityId}`);
 });
 
 // Returns JSON array of cities
@@ -88,8 +62,26 @@ app.get("/countries/:Code", async (req, res) => {
     return res.render("country", { country });
 });
 
+// Returns JSON array of cities
 app.get("/api/countries", async (req, res) => {
     const [rows, fields] = await db.getCountries();
+    return res.send(rows);
+});
+
+app.get("/countrylanguages", async (req, res) => {
+    const [rows, fields] = await db.getCountrylanguages();
+    return res.render("countrylanguages", { rows, fields });
+});
+
+app.get("/countrylanguages/:Language", async (req, res) => {
+    const countrylanguageLanguage = req.params.id;
+    const countrylanguages = await db.getCountrylanguage(countrylanguageLanguage);
+    return res.render("countrylanguages", { countrylanguages });
+});
+
+// Returns JSON array of country Languages
+app.get("/api/countrylanguages", async (req, res) => {
+    const [rows, fields] = await db.getCountrylanguages();
     return res.send(rows);
 });
 

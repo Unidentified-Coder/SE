@@ -84,4 +84,16 @@ export default class DatabaseService {
             return undefined;
         }
     }
+
+    async getCountrylanguages() {
+        try {
+            // Fetch cities from database
+            const data = await this.conn.execute("SELECT * FROM `countrylanguage`");
+            return data;
+        } catch (err) {
+            // Handle error...
+            console.error(err);
+            return undefined;
+        }
+    }
 }
