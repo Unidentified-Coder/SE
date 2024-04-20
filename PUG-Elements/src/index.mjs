@@ -57,7 +57,6 @@ app.get("/cities/:id", async (req, res) => {
     const city = await db.getCity(cityId);
     return res.render("city", { city });
 });
-//wpw
 
 /* Update a city by ID */
 app.post("/cities/:id", async (req, res) => {
@@ -78,9 +77,20 @@ app.get("/api/cities", async (req, res) => {
     return res.send(rows);
 });
 
+app.get("/countries", async (req, res) => {
+    const [rows, fields] = await db.getCountries();
+    return res.render("countries", { rows, fields });
+});
+
+app.get("/countries/:Code", async (req, res) => {
+    const countryCode = req.params.id;
+    const country = await db.getCountry(countryCode);
+    return res.render("country", { country });
+});
+
 app.get("/api/countries", async (req, res) => {
-    const countries = await db.getCountries();
-    res.send(countries);
+    const [rows, fields] = await db.getCountries();
+    return res.send(rows);
 });
 
 /* Authentication */

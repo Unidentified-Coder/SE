@@ -41,20 +41,11 @@ app.get("/cities", (req, res) => {
   });
 });
 
-//Dinamic route example
-app.get("/city/:id", function (req, res) {
-  //req.params contains any parametres in the request
-  //We can examinit in the console for debugging purpose
-  console.log(req, res);
-  //Retrive the name paramentre and use it in a dinamic generated 
-  res.send("Id is " + req.params.id);
-
-});
-
 // Gives the route for the country in the sql database
-app.get("/countrylanguage", (req, res) => {
-  db.execute("SELECT * FROM `countryLanguage`", (err, rows, fields) =>{
-    return res.render("countrylanguage", {rows, fields})
+app.get("/countries", (req, res) => {
+  db.execute("SELECT * FROM `country`", (err, rows, fields) => {
+    console.log(`/countries: ${rows.length} rows`);
+    return res.send(rows);
   });
 });
 
