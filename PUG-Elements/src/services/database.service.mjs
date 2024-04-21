@@ -74,9 +74,26 @@ export default class DatabaseService {
 
     /* Get a list of countries */
     async getCountries() {
-        const sql = `SELECT * FROM country`;
-        const [rows, fields] = await this.conn.execute(sql);
-        const countries = rows.map(c => new Country(c.Code, c.Name, c.Continent, c.Region, c.Population));
-        return countries;
+        try {
+            // Fetch cities from database
+            const data = await this.conn.execute("SELECT * FROM `country`");
+            return data;
+        } catch (err) {
+            // Handle error...
+            console.error(err);
+            return undefined;
+        }
+    }
+
+    async getCountrylanguages() {
+        try {
+            // Fetch cities from database
+            const data = await this.conn.execute("SELECT * FROM `countrylanguage`");
+            return data;
+        } catch (err) {
+            // Handle error...
+            console.error(err);
+            return undefined;
+        }
     }
 }
