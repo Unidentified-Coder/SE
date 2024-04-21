@@ -32,19 +32,29 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/cities", async (req, res) => {
-    // Initialize default values
-    let sortOrder = "";
+    // Initialize default sort values
+    let sortPopulation = "";
+    let sortName = "";
     const validSortOrders = ["asc", "desc"]; // Define valid sort orders to prevent SQL injection
 
-    // Validate the sort parameter
-    if (req.query.sort && validSortOrders.includes(req.query.sort.toLowerCase())) {
-        sortOrder = req.query.sort.toUpperCase();
+    // Validate the sort parameter for population
+    if (req.query.sortPopulation && validSortOrders.includes(req.query.sortPopulation.toLowerCase())) {
+        sortPopulation = `Population ${req.query.sortPopulation.toUpperCase()}`;
+    }
+
+    // Validate the sort parameter for name
+    if (req.query.sortName && validSortOrders.includes(req.query.sortName.toLowerCase())) {
+        sortName = `Name ${req.query.sortName.toUpperCase()}`;
     }
 
     // Construct SQL query with or without ORDER BY clause
     let query = "SELECT * FROM city";
-    if (sortOrder) {
-        query += ` ORDER BY Population ${sortOrder}`;
+    let orderClauses = [];
+    if (sortPopulation) orderClauses.push(sortPopulation);
+    if (sortName) orderClauses.push(sortName);
+
+    if (orderClauses.length > 0) {
+        query += ` ORDER BY ${orderClauses.join(", ")}`;
     }
 
     try {
@@ -62,6 +72,7 @@ app.get("/cities", async (req, res) => {
         }
     }
 });
+
 
 
 app.get("/cities/:Id", async (req, res) => {

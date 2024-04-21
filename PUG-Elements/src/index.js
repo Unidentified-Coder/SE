@@ -35,38 +35,41 @@ app.get("/ping", (req, res) => {
 
 // Returns an array of cities from the database
 app.get("/cities", (req, res) => {
-  let sortField = 'Population'; // Default sort field
-  let sortOrder = 'ASC'; // Default sort order
+  // Initialize sorting clauses
+  let orderClauses = [];
+
+  // Define valid sort options and corresponding SQL
+  const sortOptions = {
+      'population_asc': 'Population ASC',
+      'population_desc': 'Population DESC',
+      'name_asc': 'Name ASC',
+      'name_desc': 'Name DESC'
+  };
 
   // Check if sort parameter is provided and valid
-  if (req.query.sort) {
-    const sortOption = req.query.sort.toLowerCase();
-    if (sortOption === 'population_asc') {
-      sortField = 'Population';
-      sortOrder = 'ASC';
-    } else if (sortOption === 'population_desc') {
-      sortField = 'Population';
-      sortOrder = 'DESC';
-    } else if (sortOption === 'name_asc') {
-      sortField = 'Name';
-      sortOrder = 'ASC';
-    } else if (sortOption === 'name_desc') {
-      sortField = 'Name';
-      sortOrder = 'DESC';
-    }
+  Object.keys(sortOptions).forEach(key => {
+      if (req.query[key]) {
+          orderClauses.push(sortOptions[key]);
+      }
+  });
+
+  // Build the query with dynamic ORDER BY clause
+  let query = "SELECT * FROM city";
+  if (orderClauses.length > 0) {
+      query += ` ORDER BY ${orderClauses.join(", ")}`;
   }
 
-  const query = `SELECT * FROM city ORDER BY ${sortField} ${sortOrder}`;
-
+  // Execute the query
   db.execute(query, (err, rows, fields) => {
-    if (err) {
-      console.error("Error fetching cities:", err);
-      return res.status(500).send("Internal Server Error");
-    }
-    console.log(`/cities: ${rows.length} rows`);
-    return res.render("cities", { rows, fields });
+      if (err) {
+          console.error("Error fetching cities:", err);
+          return res.status(500).send("Internal Server Error");
+      }
+      console.log(`/cities: ${rows.length} rows`);
+      return res.render("cities", { rows, fields });
   });
 });
+
 
 
 // Gives the route for the country in the sql database
