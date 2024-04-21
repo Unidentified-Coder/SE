@@ -3,7 +3,6 @@ import express from "express";
 import mysql from "mysql2/promise";
 import DatabaseService from "./services/database.service.mjs";
 
-
 /* Create express instance */
 const app = express();
 const port = 3000;
@@ -11,17 +10,16 @@ const port = 3000;
 /* Add form data middleware */
 app.use(express.urlencoded({ extended: true }));
 
-//Use the pug template engine
+// Use the pug template engine
 app.set("view engine", "pug");
 app.set("views", "./views");
 
-//Add a static files location
+// Add a static files location
 app.use(express.static("static"));
 
 console.log(process.env.MODE_ENV);
 
 const db = await DatabaseService.connect();
-const { conn } = db;
 
 // Landing route
 app.get("/", (req, res) => {
@@ -34,9 +32,31 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/cities", async (req, res) => {
-    const [rows, fields] = await db.getCities();
-    /* Render cities.pug with data passed as plain object */
-    return res.render("cities", { rows, fields });
+    let sortOrder = ""; // Default sorting order (no sorting)
+
+    // Check if sort parameter is provided and valid
+    if (req.query.sort) {
+        if (req.query.sort.toLowerCase() === "asc") {
+            sortOrder = "ASC";
+        } else if (req.query.sort.toLowerCase() === "desc") {
+            sortOrder = "DESC";
+        }
+    }
+
+    let query = "SELECT * FROM city";
+
+    // Append ORDER BY clause if sortOrder is valid
+    if (sortOrder) {
+        query += ` ORDER BY Population ${sortOrder}`;
+    }
+
+    try {
+        const [rows, fields] = await db.conn.execute(query);
+        return res.render("cities", { rows, fields });
+    } catch (error) {
+        console.error("Error fetching cities:", error);
+        return res.status(500).send("Internal Server Error");
+    }
 });
 
 app.get("/cities/:Id", async (req, res) => {
@@ -62,7 +82,7 @@ app.get("/countries/:Code", async (req, res) => {
     return res.render("country", { country });
 });
 
-// Returns JSON array of cities
+// Returns JSON array of countries
 app.get("/api/countries", async (req, res) => {
     const [rows, fields] = await db.getCountries();
     return res.send(rows);
@@ -79,7 +99,7 @@ app.get("/countrylanguages/:Language", async (req, res) => {
     return res.render("countrylanguages", { countrylanguages });
 });
 
-// Returns JSON array of country Languages
+// Returns JSON array of country languages
 app.get("/api/countrylanguages", async (req, res) => {
     const [rows, fields] = await db.getCountrylanguages();
     return res.send(rows);

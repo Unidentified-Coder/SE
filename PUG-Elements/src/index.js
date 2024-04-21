@@ -35,9 +35,18 @@ app.get("/ping", (req, res) => {
 
 // Returns an array of cities from the database
 app.get("/cities", (req, res) => {
-  db.execute("SELECT * FROM `city`", (err, rows, fields) => {
+  let sortOrder = "ASC"; // Default sorting order
+
+  // Check if sort parameter is provided and valid
+  if (req.query.sort && (req.query.sort.toLowerCase() === "asc" || req.query.sort.toLowerCase() === "desc")) {
+    sortOrder = req.query.sort.toUpperCase();
+  }
+
+  const query = `SELECT * FROM city ORDER BY Population ${sortOrder}`;
+
+  db.execute(query, (err, rows, fields) => {
     console.log(`/cities: ${rows.length} rows`);
-    return res.send(rows);
+    return res.render("cities", { rows, fields });
   });
 });
 
