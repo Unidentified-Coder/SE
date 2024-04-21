@@ -32,32 +32,37 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/cities", async (req, res) => {
-    let sortOrder = ""; // Default sorting order (no sorting)
+    // Initialize default values
+    let sortOrder = "";
+    const validSortOrders = ["asc", "desc"]; // Define valid sort orders to prevent SQL injection
 
-    // Check if sort parameter is provided and valid
-    if (req.query.sort) {
-        if (req.query.sort.toLowerCase() === "asc") {
-            sortOrder = "ASC";
-        } else if (req.query.sort.toLowerCase() === "desc") {
-            sortOrder = "DESC";
-        }
+    // Validate the sort parameter
+    if (req.query.sort && validSortOrders.includes(req.query.sort.toLowerCase())) {
+        sortOrder = req.query.sort.toUpperCase();
     }
 
+    // Construct SQL query with or without ORDER BY clause
     let query = "SELECT * FROM city";
-
-    // Append ORDER BY clause if sortOrder is valid
     if (sortOrder) {
         query += ` ORDER BY Population ${sortOrder}`;
     }
 
     try {
-        const [rows, fields] = await db.conn.execute(query);
-        return res.render("cities", { rows, fields });
+        // Execute the query
+        const [rows] = await db.conn.execute(query);
+        // Render the page using the 'cities' template and pass rows
+        res.render("cities", { rows });
     } catch (error) {
         console.error("Error fetching cities:", error);
-        return res.status(500).send("Internal Server Error");
+        // Provide more specific error handling based on the error type
+        if (error instanceof SyntaxError) {
+            res.status(400).send("Bad Request: Error in SQL syntax.");
+        } else {
+            res.status(500).send("Internal Server Error");
+        }
     }
 });
+
 
 app.get("/cities/:Id", async (req, res) => {
     const cityId = req.params.id;

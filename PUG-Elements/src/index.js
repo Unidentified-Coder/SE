@@ -35,20 +35,39 @@ app.get("/ping", (req, res) => {
 
 // Returns an array of cities from the database
 app.get("/cities", (req, res) => {
-  let sortOrder = "ASC"; // Default sorting order
+  let sortField = 'Population'; // Default sort field
+  let sortOrder = 'ASC'; // Default sort order
 
   // Check if sort parameter is provided and valid
-  if (req.query.sort && (req.query.sort.toLowerCase() === "asc" || req.query.sort.toLowerCase() === "desc")) {
-    sortOrder = req.query.sort.toUpperCase();
+  if (req.query.sort) {
+    const sortOption = req.query.sort.toLowerCase();
+    if (sortOption === 'population_asc') {
+      sortField = 'Population';
+      sortOrder = 'ASC';
+    } else if (sortOption === 'population_desc') {
+      sortField = 'Population';
+      sortOrder = 'DESC';
+    } else if (sortOption === 'name_asc') {
+      sortField = 'Name';
+      sortOrder = 'ASC';
+    } else if (sortOption === 'name_desc') {
+      sortField = 'Name';
+      sortOrder = 'DESC';
+    }
   }
 
-  const query = `SELECT * FROM city ORDER BY Population ${sortOrder}`;
+  const query = `SELECT * FROM city ORDER BY ${sortField} ${sortOrder}`;
 
   db.execute(query, (err, rows, fields) => {
+    if (err) {
+      console.error("Error fetching cities:", err);
+      return res.status(500).send("Internal Server Error");
+    }
     console.log(`/cities: ${rows.length} rows`);
     return res.render("cities", { rows, fields });
   });
 });
+
 
 // Gives the route for the country in the sql database
 app.get("/countries", (req, res) => {
