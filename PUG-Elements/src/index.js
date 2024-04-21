@@ -52,9 +52,22 @@ app.get("/cities", (req, res) => {
 
 // Gives the route for the country in the sql database
 app.get("/countries", (req, res) => {
-  db.execute("SELECT * FROM `country`", (err, rows, fields) => {
+  let sortOrder = "ASC"; // Default sorting order
+
+  // Check if sort parameter is provided and valid
+  if (req.query.sort && (req.query.sort.toLowerCase() === "asc" || req.query.sort.toLowerCase() === "desc")) {
+    sortOrder = req.query.sort.toUpperCase();
+  }
+
+  const query = `SELECT * FROM country ORDER BY Population ${sortOrder}`;
+
+  db.execute(query, (err, rows, fields) => {
+    if (err) {
+      console.error("Error fetching countries:", err);
+      return res.status(500).send("Internal Server Error");
+    }
     console.log(`/countries: ${rows.length} rows`);
-    return res.send(rows);
+    return res.render("countries", { rows, fields });
   });
 });
 

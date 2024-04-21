@@ -20,6 +20,15 @@ block content
     }
 
   h2 Countries 
+    // Add a form for population sorting
+  form(action="/cities" method="get")
+    label(for="sort") Sort by Population:
+    select(name="sort" id="sort")
+      option(value="none" selected) None
+      option(value="asc") Lowest to Highest
+      option(value="desc") Highest to Lowest
+    button(type="submit" id="apply-filter") Apply
+
   table
     thead
       tr

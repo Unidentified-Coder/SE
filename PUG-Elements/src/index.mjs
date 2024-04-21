@@ -72,8 +72,32 @@ app.get("/api/cities", async (req, res) => {
 });
 
 app.get("/countries", async (req, res) => {
-    const [rows, fields] = await db.getCountries();
-    return res.render("countries", { rows, fields });
+    let sortOrder = ""; // Default sorting order (no sorting)
+    let sortField = "Population"; // Default field to sort by
+
+    // Check if sort parameter is provided and valid
+    if (req.query.sort) {
+        if (req.query.sort.toLowerCase() === "asc") {
+            sortOrder = "ASC";
+        } else if (req.query.sort.toLowerCase() === "desc") {
+            sortOrder = "DESC";
+        }
+    }
+
+    let query = "SELECT * FROM country";
+
+    // Append ORDER BY clause if sortOrder is valid
+    if (sortOrder) {
+        query += ` ORDER BY ${sortField} ${sortOrder}`;
+    }
+
+    try {
+        const [rows, fields] = await db.conn.execute(query);
+        return res.render("countries", { rows, fields });
+    } catch (error) {
+        console.error("Error fetching countries:", error);
+        return res.status(500).send("Internal Server Error");
+    }
 });
 
 app.get("/countries/:Code", async (req, res) => {
