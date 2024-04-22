@@ -3,12 +3,15 @@
 }
 
 body {
+    min-height: 100vh;
     margin: 0;
     padding: 0;
-    background-image: url('bt.jpg');
-    background-size: cover;
-    background-position: center;
-    background-color: var(--clr-table); /* Set background color */
+    /* background-image: url('kjopo.jpg');
+    background-size: cover; /* Adjust this property as needed */
+    /* background-position: center;
+    background-repeat: no-repeat;  */
+/* 
+    background-color: var(--clr-table); Set background color */
 }
 
 .container {
@@ -22,6 +25,7 @@ body {
 table {
     border: 1px solid var(--clr-table);
     border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.9);
     width: 100%; /* Set table width to 100% of its container */
     table-layout: auto; /* Use automatic table layout */
 }
@@ -33,6 +37,7 @@ td {
     text-align: center;
     color: rgba(16, 14, 14, 0.85);
     overflow-wrap: break-word; /* Break words to prevent overflow */
+    text-align: center;
 }
 
 /* Remove border-right for the last column */
