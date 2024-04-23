@@ -1,9 +1,18 @@
 extends layout.pug 
 
 block head 
-  link(rel="stylesheet", href="/form.css")
+  link(rel="stylesheet", href="/login.css")
 
 block content
+  style.
+    body {
+      background-image: url('kjopo.jpg');
+      background-size: cover;
+    }
+
+    table {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
   h2 Login
   form(action='/api/login', method='POST')
     label(for='email') Enter your email:
